@@ -1,0 +1,124 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_main
+_main:
+	ld	hl, -3
+	call	__frameset
+	call	_gfx_Begin
+	call	_gfx_ZeroScreen
+BB0_1:
+	or	a, a
+	sbc	hl, hl
+BB0_2:
+	ld	(ix - 3), hl
+	call	_kb_Scan
+	ld	hl, -720878
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	hl, -720868
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	a, e
+	bit	6, a
+	jp	nz, BB0_11
+	ld	a, c
+	and	a, 32
+	ld	l, a
+	ld	de, (ix - 3)
+	ld	a, e
+	add	a, l
+	or	a, a
+	ld	hl, 1
+	jr	nz, BB0_2
+	ld	iy, -2883584
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	inc.sis	hl
+	ld	(iy), l
+	ld	(iy + 1), h
+	ld	de, 0
+	xor	a, a
+BB0_5:
+	ld	c, 1
+	push	de
+	pop	hl
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld.sis	bc, -1
+	or	a, a
+	sbc.sis	hl, bc
+	jr	nz, BB0_1
+	ld.sis	hl, 0
+	ld	(iy), l
+	ld	(iy + 1), h
+	ex	de, hl
+	ld	e, a
+	ld	bc, 1
+	xor	a, a
+	call	__ladd
+	push	hl
+	pop	bc
+	ld	iyl, e
+	ld	hl, 153599
+	ld	e, a
+	ld	a, iyl
+	call	__lcmpu
+	ccf
+	sbc	a, a
+	inc	a
+	bit	0, a
+	ld	de, 0
+	jr	nz, BB0_8
+	push	bc
+	pop	de
+BB0_8:
+	bit	0, a
+	ld	a, 0
+	jr	nz, BB0_10
+	ld	a, iyl
+BB0_10:
+	push	de
+	pop	hl
+	ld	c, 1
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, -2883584
+	lea	hl, iy
+	add	hl, bc
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	dec	hl
+	inc.sis	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jp	BB0_5
+BB0_11:
+	call	_gfx_End
+	or	a, a
+	sbc	hl, hl
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 14.0.0 (https://github.com/jacobly0/llvm-project 56af4f86925b7eebf23dae240e0a77c64066179e)"
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	_gfx_ZeroScreen
+	extern	_gfx_Begin
+	extern	_kb_Scan
+	extern	_gfx_End
+	extern	__lcmpu
+	extern	__ishl
+	extern	__ladd

@@ -1,0 +1,54 @@
+Section          Base   Top    High   Length
+---------------- ------ ------ ------ -------
+.icon            D1A882 D1A896            14h
+.init.libs       D1A896 D1A8EE            58h
+.libs            D1A8EE D1A91B            2Dh
+.init.clock      D1A91B D1A91B             0h
+.init.reruncheck D1A91B D1A91B             0h
+.init            D1A91B D1A93B            20h
+.fini            D1A93B D1A96F            34h
+.text            D1A96F D1AA87           118h
+.data            D1AA87 D1AA87             0h
+.rodata          D1AA87 D1AAA9            22h
+.init_array      000000 000000             0h
+.ctors           000000 000000             0h
+.dtors           000000 000000             0h
+.fini_array      000000 000000             0h
+.bss             D052C6 D052C6 D13FD8      0h
+.header          D1A87F D1A882             3h
+
+Label                       Value
+-------------------------   ------
+___low_bss                = D052C6
+___len_bss                = 000000
+___heaptop                = D13FD8
+___heapbot                = D052C6
+___libs                   = D1A8EE
+___init_array_count       = 000000
+___ctors_count            = 000000
+___dtors_count            = 000000
+___fini_array_count       = 000000
+__stack                   = D1A87E
+__frameset                = D1A96F
+__ladd                    = D1A97D
+__lcmpu                   = D1A983
+_os_DisableHomeTextBuffer = D1A98B
+_os_EnableHomeTextBuffer  = D1A99D
+__ishl                    = 000174
+.missingappvar            = D1AA87
+.libloadname              = D1AA8C
+.libloadnamelen           = 000007
+.webaddress               = D1AA94
+__start                   = D1A91B
+___exithl                 = D1A93B
+skip._exit                = D1A93B
+skip.__Exit               = D1A93B
+skip._abort               = D1A93B
+_exit.sp                  = D1A93C
+_exit.flash_wait_states   = D1A946
+_main                     = D1A9AF
+lib.LibLoad               = D1A8EE
+_#gfx_Begin               = D1A901
+_#gfx_End                 = D1A905
+_#gfx_ZeroScreen          = D1A909
+_#kb_Scan                 = D1A917

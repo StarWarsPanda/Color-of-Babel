@@ -1,45 +1,31 @@
 #include <tice.h>
-#include <graphx.h>
 #include <sys/lcd.h>
+#include <string.h>
 
 #include <Keys.h>
 
 int main()
 {
-	uint32_t i = 0;
-	bool pause = false;
+	size_t i = 0;
+	uint16_t* vram = (uint16_t*)lcd_Ram;
 
-	gfx_Begin();
+	memset(lcd_Ram, 0, LCD_SIZE);
 
-	gfx_ZeroScreen();
-	
-	while (true)
+	do
 	{
-		do
+		kb_Scan();
+
+		vram[i]++;
+
+		while (vram[i] >= UINT16_MAX)
 		{
-			kb_Scan();
-
-			pause ^= Key_2nd;
-
-			if (Key_Clear) goto end;
-
-		} while (pause);
-
-		lcd_Ram[i]++;
-
-		while (lcd_Ram[i] >= UINT16_MAX)
-		{
-			lcd_Ram[i] = 0;
+			vram[i] = 0;
 			i++;
-			if (i >= LCD_SIZE) { i = 0; }
-			lcd_Ram[i]++;
+			vram[i]++;
 		}
 
 		i = 0;
-	}
-
-end:
-	gfx_End();
+	} while (!Key_Clear);
 
 	return 0;
 }
